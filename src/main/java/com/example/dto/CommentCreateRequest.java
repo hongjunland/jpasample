@@ -1,2 +1,4 @@
-package com.example.dto;public record CommentCreateRequest() {
+package com.example.dto;
+
+public record CommentCreateRequest(String content) {
 }

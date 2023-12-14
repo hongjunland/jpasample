@@ -1,0 +1,37 @@
+# Gradle 관련
+.gradle/
+build/
+
+# 빌드 출력
+out/
+target/
+
+# 로그 파일
+*.log
+
+# Java 관련
+*.class
+*.jar
+*.war
+*.zip
+
+# 다양한 IDE 설정 파일 및 폴더
+.idea/
+*.iml
+*.ipr
+*.iws
+*.eclipse
+*.settings/
+*.vscode/
+
+# 운영체제 관련 파일
+.DS_Store
+Thumbs.db
+
+# 개인적인 설정 파일
+*.swp
+*.swo
+
+# 임시 파일
+tmp/
+temp/
