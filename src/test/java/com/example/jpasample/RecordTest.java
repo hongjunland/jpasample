@@ -72,7 +72,7 @@ public class RecordTest {
     }
     @Test
     public void createComment(){
-        String apiUrl = "http://localhost:8788/api/v1/posts/1/comments";
+        String apiUrl = "http://localhost:8788/api/v1/posts/2/comments";
         String requestJson = """
                 {
                      "content": "content2"
@@ -82,7 +82,7 @@ public class RecordTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(requestJson, headers);
         Instant start = Instant.now();
-        for (int i = 0 ; i < 1; i++) {
+        for (int i = 0 ; i < 5; i++) {
             restTemplate.postForEntity(apiUrl, request, String.class);
         }
         Instant end = Instant.now();

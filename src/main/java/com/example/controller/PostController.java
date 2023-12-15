@@ -15,12 +15,15 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody @Valid PostCreateRequest createRequest){
-        var result = postService.createPost(createRequest);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(postService.createPost(createRequest));
     }
     @GetMapping
     public ResponseEntity<?> getPostList(){
         return ResponseEntity.ok(postService.findPostList());
+    }
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getPostById(@PathVariable Long postId){
+        return ResponseEntity.ok(postService.findByPostId(postId));
     }
     @GetMapping("/count")
     public ResponseEntity<?> getCount(){

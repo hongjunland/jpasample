@@ -19,28 +19,17 @@ public class CommentService {
     private final PostService postService;
     @Transactional
     public boolean createComment(Long postId, CommentCreateRequest commentCreateRequest){
-        PostJpaEntity postJpaEntity = postService.findByPostId(postId);
+        PostJpaEntity postJpaEntity = postService.findByIdPostJpaEntity(postId);
         CommentJpaEntity commentJpaEntity = CommentJpaEntity.builder()
                 .post(postJpaEntity)
                 .content(commentCreateRequest.content())
                 .build();
         postJpaEntity.createComment(commentJpaEntity);
-
-        for (CommentJpaEntity commentJpaEntity1 : postJpaEntity.getComments()) {
-            System.out.println(commentJpaEntity1.getCommentId());
-        }
-
-        List<PostJpaEntity> postJpaEntities = postService.findPostJpaList();
-
-        for (PostJpaEntity postJpaEntity1 : postJpaEntities) {
-            System.out.println(postJpaEntity1.getComments().get(0).getCommentId());
-        }
-
         return true;
     }
     public List<CommentReadResponse> getCommentList(Long postId){
         List<CommentReadResponse> response = new ArrayList<>();
-        PostJpaEntity postJpaEntity = postService.findByPostId(postId);
+        PostJpaEntity postJpaEntity = postService.findByIdPostJpaEntity(postId);
 //        List<CommentJpaEntity> entityList = commentJpaRepository.findByPost(postJpaEntity);
         List<CommentJpaEntity> entityList = postJpaEntity.getComments();
         for(CommentJpaEntity entity: entityList){

@@ -1,4 +1,9 @@
 package com.example.dto;
 
-public record PostReadResponse(Long postId, String title, String content) {
+import lombok.Builder;
+
+import java.util.List;
+
+@Builder
+public record PostReadResponse(Long postId, String title, String content, List<CommentReadResponse> comment) {
 }

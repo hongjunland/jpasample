@@ -17,11 +17,12 @@ public class PostJpaEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "post_id")
     private Long postId;
+    @Column(name = "title")
     private String title;
+    @Column(name = "content")
     private String content;
 
-//    @OneToMany
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CommentJpaEntity> comments;
 
     public void createComment(CommentJpaEntity commentJpaEntity){

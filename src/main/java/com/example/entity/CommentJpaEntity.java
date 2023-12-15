@@ -17,9 +17,10 @@ public class CommentJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentId;
+    @Column(name = "content")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private PostJpaEntity post;
 }
