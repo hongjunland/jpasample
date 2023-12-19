@@ -1,5 +1,6 @@
-package com.example.entity;
+package com.example.comment.adapter.out.persistence;
 
+import com.example.post.adapter.out.persistence.PostJpaEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
