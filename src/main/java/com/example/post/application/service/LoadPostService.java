@@ -2,8 +2,9 @@ package com.example.post.application.service;
 
 
 import com.example.common.annotation.UseCase;
+import com.example.post.adapter.in.response.CommentResponse;
 import com.example.post.adapter.in.response.PostResponse;
-import com.example.post.application.port.in.GetPostQuery;
+import com.example.post.application.port.in.GetPostUseCase;
 import com.example.post.application.port.out.LoadPostPort;
 import com.example.post.domain.Post;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
+
 @RequiredArgsConstructor
 @UseCase
 @Transactional
-public class LoadPostService implements GetPostQuery {
+class LoadPostService implements GetPostUseCase {
     private final LoadPostPort loadPostPort;
 
     @Override
@@ -24,7 +26,12 @@ public class LoadPostService implements GetPostQuery {
                 .postId(post.getId().value())
                 .title(post.getTitle())
                 .content(post.getContent())
-//                .comment(post.getComments().stream().collect(Collectors.toList()))
+                .comment(post.getComments().stream().map(
+                        (comment) -> CommentResponse.builder()
+                                .content(comment.getContent())
+                                .postId(comment.getPostId().value())
+                                .build())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

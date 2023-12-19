@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @PersistenceAdapter
-public class PostPersistenceAdapter implements CreatePostPort {
+class PostPersistenceAdapter implements CreatePostPort {
     private final SpringDataPostRepository springDataPostRepository;
     private final PostMapper postMapper;
     @Override

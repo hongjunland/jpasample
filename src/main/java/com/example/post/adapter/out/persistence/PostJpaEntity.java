@@ -1,7 +1,6 @@
 package com.example.post.adapter.out.persistence;
 
 
-import com.example.comment.adapter.out.persistence.CommentJpaEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

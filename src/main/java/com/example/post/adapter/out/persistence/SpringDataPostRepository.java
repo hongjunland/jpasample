@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SpringDataPostRepository extends JpaRepository<PostJpaEntity, Long> {
+interface SpringDataPostRepository extends JpaRepository<PostJpaEntity, Long> {
     @Override
     @Query("select b from PostJpaEntity b left join fetch b.comments")
     List<PostJpaEntity> findAll();

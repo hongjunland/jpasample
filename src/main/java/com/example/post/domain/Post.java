@@ -1,6 +1,5 @@
 package com.example.post.domain;
 
-import com.example.comment.domain.Comment;
 import lombok.*;
 
 import java.util.List;
@@ -27,5 +26,6 @@ public class Post {
                 .content(content)
                 .build();
     }
-    public record PostId(Long value){}
+
+    public record PostId(Long value) {}
 }

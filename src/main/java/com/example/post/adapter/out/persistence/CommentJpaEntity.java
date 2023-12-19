@@ -1,4 +1,4 @@
-package com.example.comment.adapter.out.persistence;
+package com.example.post.adapter.out.persistence;
 
 import com.example.post.adapter.out.persistence.PostJpaEntity;
 import jakarta.persistence.*;
@@ -17,6 +17,7 @@ public class CommentJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "comment_id")
     private Long commentId;
     @Column(name = "content")
     private String content;

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @UseCase
 @Transactional
-public class CreatePostService implements CreatePostUseCase {
+class CreatePostService implements CreatePostUseCase {
     private final CreatePostPort createPostPort;
 
     @Override
