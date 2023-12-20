@@ -4,6 +4,7 @@ package com.example.post.adapter.out.persistence;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,8 +23,8 @@ public class PostJpaEntity {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<CommentJpaEntity> comments;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<CommentJpaEntity> comments = new ArrayList<>();
 
     public void createComment(CommentJpaEntity commentJpaEntity){
         comments.add(commentJpaEntity);

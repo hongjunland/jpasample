@@ -14,8 +14,6 @@ class PostMapper {
         return PostJpaEntity.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
-//                .comments(post.getComments().stream().map((comment)->commentMapper.domainToEntity(comment, post))
-//                        .collect(Collectors.toList()))
                 .build();
     }
     public Post entityToDomain(PostJpaEntity postJpaEntity){

@@ -28,6 +28,7 @@ class LoadPostService implements GetPostUseCase {
                 .content(post.getContent())
                 .comment(post.getComments().stream().map(
                         (comment) -> CommentResponse.builder()
+                                .commentId(comment.getId().value())
                                 .content(comment.getContent())
                                 .postId(comment.getPostId().value())
                                 .build())

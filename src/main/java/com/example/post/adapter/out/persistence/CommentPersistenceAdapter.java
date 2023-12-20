@@ -20,6 +20,6 @@ class CommentPersistenceAdapter implements CreateCommentPort {
         CommentJpaEntity commentJpaEntity = commentMapper.domainToEntity(comment, postJpaEntity);
         postJpaEntity.createComment(commentJpaEntity);
         springDataPostRepository.save(postJpaEntity);
-        return false;
+        return true;
     }
 }
