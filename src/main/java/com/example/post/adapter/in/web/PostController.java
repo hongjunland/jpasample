@@ -7,6 +7,7 @@ import com.example.post.application.port.in.PostCreateUseCase;
 import com.example.post.application.port.in.PostLoadUseCase;
 import com.example.post.application.port.in.command.PostCreateCommand;
 import com.example.post.application.port.in.command.PostQuery;
+import com.example.post.application.port.in.command.PostSearchByTitleQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +32,12 @@ class PostController {
                 .postId(postId)
                 .build();
         return SuccessApiResponse.of(getPostUseCase.getPostById(postQuery));
+    }
+    @GetMapping
+    public SuccessApiResponse<?> getPostListByTitle(@RequestParam String title){
+        PostSearchByTitleQuery postSearchByTitleQuery = PostSearchByTitleQuery.builder()
+                .title(title)
+                .build();
+        return SuccessApiResponse.of(getPostUseCase.searchPostListByTitle(postSearchByTitleQuery));
     }
 }
