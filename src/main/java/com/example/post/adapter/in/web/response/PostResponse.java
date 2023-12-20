@@ -1,4 +1,4 @@
-package com.example.post.adapter.in.response;
+package com.example.post.adapter.in.web.response;
 
 import lombok.Builder;
 

@@ -2,8 +2,8 @@ package com.example.post.application.service;
 
 
 import com.example.common.annotation.UseCase;
-import com.example.post.adapter.in.response.CommentResponse;
-import com.example.post.adapter.in.response.PostResponse;
+import com.example.post.adapter.in.web.response.CommentResponse;
+import com.example.post.adapter.in.web.response.PostResponse;
 import com.example.post.application.port.in.PostLoadUseCase;
 import com.example.post.application.port.in.command.PostQuery;
 import com.example.post.application.port.out.LoadPostPort;

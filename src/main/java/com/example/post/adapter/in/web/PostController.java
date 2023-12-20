@@ -1,8 +1,8 @@
-package com.example.post.adapter.in;
+package com.example.post.adapter.in.web;
 
 import com.example.common.annotation.WebAdapter;
 import com.example.common.response.SuccessApiResponse;
-import com.example.post.adapter.in.request.PostCreateRequest;
+import com.example.post.adapter.in.web.request.PostCreateRequest;
 import com.example.post.application.port.in.PostCreateUseCase;
 import com.example.post.application.port.in.PostLoadUseCase;
 import com.example.post.application.port.in.command.PostCreateCommand;
