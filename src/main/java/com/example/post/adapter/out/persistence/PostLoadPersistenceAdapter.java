@@ -11,7 +11,7 @@ class PostLoadPersistenceAdapter implements LoadPostPort {
     private final PostMapper postMapper;
     @Override
     public Post loadById(Long id) {
-        PostJpaEntity postJpaEntity = springDataPostRepository.findById(id)
+        PostJpaEntity postJpaEntity = springDataPostRepository.findByIdWithComments(id)
                 .orElseThrow(RuntimeException::new);
         return postMapper.entityToDomain(postJpaEntity);
     }

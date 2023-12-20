@@ -16,10 +16,14 @@ class PostMapper {
                 .content(post.getContent())
                 .build();
     }
-    public Post entityToDomain(PostJpaEntity postJpaEntity){
-        return Post.withId(new Post.PostId(postJpaEntity.getPostId()),
-                postJpaEntity.getTitle(), postJpaEntity.getContent(),
-                postJpaEntity.getComments().stream().map(commentMapper::entityToDomain)
-                        .collect(Collectors.toList()));
+    public Post entityToDomain(PostJpaEntity postJpaEntity) {
+        return Post.builder()
+                .id(new Post.PostId(postJpaEntity.getPostId()))
+                .title(postJpaEntity.getTitle())
+                .content(postJpaEntity.getContent())
+                .comments(postJpaEntity.getComments().stream()
+                        .map(commentMapper::entityToDomain)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }

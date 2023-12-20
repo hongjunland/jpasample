@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Builder
@@ -12,18 +15,7 @@ public class Comment {
     private final CommentId id;
     private final String content;
     private final Post.PostId postId;
-    public static Comment withId(CommentId id, String content, Post.PostId postId){
-        return Comment.builder()
-                .id(id)
-                .content(content)
-                .postId(postId)
-                .build();
-    }
-    public static Comment withoutId(String content, Post.PostId postId){
-        return Comment.builder()
-                .content(content)
-                .postId(postId)
-                .build();
-    }
+    private final CommentId parentId;
+    private final List<Comment> replies;
     public record CommentId(Long value){}
 }
