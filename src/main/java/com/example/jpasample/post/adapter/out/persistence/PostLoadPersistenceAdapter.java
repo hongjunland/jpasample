@@ -23,7 +23,11 @@ class PostLoadPersistenceAdapter implements LoadPostPort {
     public List<Post> searchByTitle(String title){
         List<PostJpaEntity> postJpaEntityList = springDataPostRepository.searchByTitle(title);
         return postJpaEntityList.stream()
-                .map(postMapper::entityToDomain)
+                .map((entity)-> Post.builder()
+                        .id(new Post.PostId(entity.getPostId()))
+                        .title(entity.getTitle())
+                        .content(entity.getContent())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

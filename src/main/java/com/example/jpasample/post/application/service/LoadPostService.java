@@ -2,6 +2,7 @@ package com.example.jpasample.post.application.service;
 
 
 import com.example.jpasample.common.annotation.UseCase;
+import com.example.jpasample.post.adapter.in.web.response.PostSearchResponse;
 import com.example.jpasample.post.application.port.in.command.PostSearchByTitleQuery;
 import com.example.jpasample.post.application.port.out.LoadPostPort;
 import com.example.jpasample.post.domain.Post;
@@ -40,19 +41,12 @@ class LoadPostService implements PostLoadUseCase {
     }
 
     @Override
-    public List<PostResponse> searchPostListByTitle(PostSearchByTitleQuery postSearchByTitleQuery) {
+    public List<PostSearchResponse> searchPostListByTitle(PostSearchByTitleQuery postSearchByTitleQuery) {
         List<Post> postList = loadPostPort.searchByTitle(postSearchByTitleQuery.title());
-        return postList.stream().map(post->PostResponse.builder()
+        return postList.stream().map(post->PostSearchResponse.builder()
                 .postId(post.getId().value())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .comment(post.getComments().stream()
-                        .map((comment) -> CommentResponse.builder()
-                                .commentId(comment.getId().value())
-                                .content(comment.getContent())
-                                .postId(comment.getPostId().value())
-                                .build())
-                        .collect(Collectors.toList()))
                 .build())
                 .collect(Collectors.toList());
     }

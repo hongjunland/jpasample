@@ -11,6 +11,6 @@ interface SpringDataPostRepository extends JpaRepository<PostJpaEntity, Long> {
     @Query("SELECT p FROM PostJpaEntity p LEFT JOIN FETCH p.comments c WHERE p.postId = :id AND c.parent IS NULL")
     Optional<PostJpaEntity> findByIdWithComments(Long id);
 
-    @Query("SELECT p FROM PostJpaEntity p LEFT JOIN FETCH p.comments c WHERE p.postId = c.post.postId AND c.parent.commentId IS NULL AND p.title LIKE '%' || :title || '%'")
+    @Query("SELECT p FROM PostJpaEntity p WHERE p.title LIKE concat('%', :title, '%')")
     List<PostJpaEntity> searchByTitle(@Param("title") String title);
 }
