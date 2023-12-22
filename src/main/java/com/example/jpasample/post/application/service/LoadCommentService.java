@@ -17,7 +17,6 @@ class LoadCommentService implements CommentLoadUseCase {
     @Override
     public CommentWithRepliesResponse getCommentListByParentId(CommentQuery commentQuery) {
         Comment comment = loadCommentPort.loadById(commentQuery.commentId());
-
         return CommentWithRepliesResponse.builder()
                 .commentId(comment.getId().value())
                 .content(comment.getContent())

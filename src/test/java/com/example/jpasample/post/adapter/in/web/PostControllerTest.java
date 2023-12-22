@@ -32,7 +32,6 @@ class PostControllerTest {
     @Mock
     private PostLoadUseCase getPostUseCase;
 
-    @DisplayName("게시물 생성기능")
     @Test
     public void createPostTest(){
         // Given
@@ -47,7 +46,6 @@ class PostControllerTest {
         verify(createPostUseCase, times(1)).createPost(any(PostCreateCommand.class));
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
     }
-    @DisplayName("게시물 아이디별 단일조회")
     @Test
     public void getPostByIdTest(){
         // Given
@@ -79,7 +77,6 @@ class PostControllerTest {
         Assertions.assertEquals(response.getData().content(), content);
         Assertions.assertEquals(response.getData().comment().size(), comments.size());
     }
-    @DisplayName("게시물 제목 검색")
     @Test
     public void getPostListByTitle(){
         // Given
