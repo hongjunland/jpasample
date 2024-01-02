@@ -35,7 +35,8 @@ class CommentController {
                 .build();
         return SuccessApiResponse.of(createCommentUseCase.createCommentReply(commentCreateCommand));
     }
-    @GetMapping("/{postId}/comments/{commentId}")
+    @GetMapping("/{postId}/c." +
+            ".domments/{commentId}")
     public SuccessApiResponse<?> getCommentByCommentId(@PathVariable Long postId, @PathVariable Long commentId){
         CommentQuery getCommentQuery = CommentQuery.builder()
                 .commentId(commentId)
