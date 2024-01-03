@@ -32,4 +32,8 @@ class ChatRoomController {
         ChatRoomResponse chatRoomResponse = chatRoomLoadUseCase.getChatRoomById(chatRoomQuery);
         return SuccessApiResponse.of(chatRoomResponse);
     }
+    @GetMapping
+    public SuccessApiResponse<?> getChatRoomList(){
+        return SuccessApiResponse.of(chatRoomLoadUseCase.getChatRoomList());
+    }
 }

@@ -6,6 +6,7 @@ import com.example.jpasample.chat.domain.ChatRoom;
 import com.example.jpasample.common.annotation.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
@@ -28,5 +29,15 @@ public class ChatRoomLoadPersistenceAdapter implements LoadChatRoomPort{
                                         .build())
                         .collect(Collectors.toList()))
                 .build();
+    }
+
+    @Override
+    public List<ChatRoom> search() {
+        List<ChatRoomJpaEntity> chatRoomJpaEntityList = springDataChatRoomRepository.findAll();
+        return chatRoomJpaEntityList.stream().map(chatRoomJpaEntity -> ChatRoom
+                        .builder()
+                        .roomId(new ChatRoom.RoomId(chatRoomJpaEntity.getChatRoomId()))
+                        .build())
+                .collect(Collectors.toList());
     }
 }
