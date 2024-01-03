@@ -1,19 +1,21 @@
 package com.example.jpasample.chat.adapter.in.web;
 
 
+import com.example.jpasample.chat.adapter.in.web.dto.ChatRoomResponse;
 import com.example.jpasample.chat.application.port.in.ChatRoomCreateUseCase;
+import com.example.jpasample.chat.application.port.in.ChatRoomLoadUseCase;
 import com.example.jpasample.chat.application.port.in.command.ChatRoomCreateCommand;
+import com.example.jpasample.chat.application.port.in.command.ChatRoomQuery;
 import com.example.jpasample.common.response.SuccessApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/rooms")
 class ChatRoomController {
     private final ChatRoomCreateUseCase chatRoomCreateUseCase;
+    private final ChatRoomLoadUseCase chatRoomLoadUseCase;
 
     @PostMapping
     public SuccessApiResponse<?> createChatRoom(){
@@ -21,5 +23,13 @@ class ChatRoomController {
                 .build();
         chatRoomCreateUseCase.createChatRoom(chatRoomCreateCommand);
         return SuccessApiResponse.of();
+    }
+    @GetMapping("/{roomId}")
+    public SuccessApiResponse<?> getChatRoom(@PathVariable Long roomId){
+        ChatRoomQuery chatRoomQuery = ChatRoomQuery.builder()
+                .id(roomId)
+                .build();
+        ChatRoomResponse chatRoomResponse = chatRoomLoadUseCase.getChatRoomById(chatRoomQuery);
+        return SuccessApiResponse.of(chatRoomResponse);
     }
 }
