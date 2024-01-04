@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ChatRoomLoadPersistenceAdapter implements LoadChatRoomPort{
+class ChatRoomLoadPersistenceAdapter implements LoadChatRoomPort{
     private final SpringDataChatRoomRepository springDataChatRoomRepository;
 
     @Override

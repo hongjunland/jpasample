@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-class ChatRoomPersistenceAdapter implements CreateChatRoomPort, CreateChatMessagePort {
+class ChatRoomPersistenceAdapter implements CreateChatRoomPort{
     private final SpringDataChatRoomRepository springDataChatRoomRepository;
 
     @Transactional
@@ -20,21 +20,6 @@ class ChatRoomPersistenceAdapter implements CreateChatRoomPort, CreateChatMessag
     public boolean createChatRoom(ChatRoom chatRoom) {
         ChatRoomJpaEntity chatRoomJpaEntity = ChatRoomJpaEntity.builder()
                 .build();
-        springDataChatRoomRepository.save(chatRoomJpaEntity);
-        return true;
-    }
-
-    @Transactional
-    @Override
-    public boolean createChatMessage(ChatMessage chatMessage) {
-        ChatRoomJpaEntity chatRoomJpaEntity = springDataChatRoomRepository.findById(chatMessage.getChatRoomId().value())
-                .orElseThrow(RuntimeException::new);
-        ChatMessageJpaEntity chatMessageJpaEntity = ChatMessageJpaEntity.builder()
-                .chatRoom(chatRoomJpaEntity)
-                .content(chatMessage.getContent())
-                .writer(chatMessage.getWriter())
-                .build();
-        chatRoomJpaEntity.createMessage(chatMessageJpaEntity);
         springDataChatRoomRepository.save(chatRoomJpaEntity);
         return true;
     }

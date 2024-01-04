@@ -1,13 +1,11 @@
 package com.example.jpasample.chat.adapter.in.web;
 
 import com.example.jpasample.chat.adapter.in.web.dto.ChatMessageRequest;
-import com.example.jpasample.chat.adapter.in.web.dto.ChatRoomResponse;
+import com.example.jpasample.chat.adapter.in.web.dto.ChatMessageResponse;
 import com.example.jpasample.chat.application.port.in.ChatMessageCreateUseCase;
-import com.example.jpasample.chat.application.port.in.ChatRoomLoadUseCase;
 import com.example.jpasample.chat.application.port.in.command.ChatMessageCreateCommand;
-import com.example.jpasample.chat.application.port.in.command.ChatRoomQuery;
-import com.example.jpasample.common.response.SuccessApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,16 +15,20 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 class ChatController {
     private final ChatMessageCreateUseCase chatMessageCreateUseCase;
-    private final ChatRoomLoadUseCase chatRoomLoadUseCase;
-    @MessageMapping("/chat.send")
-    @SendTo("/topic/public")
-    public Object sendMessage(@Payload ChatMessageRequest chatMessage) {
+    @MessageMapping("/chat/rooms/{roomId}/send")
+    @SendTo("/topic/public/rooms/{roomId}")
+    public ChatMessageResponse sendMessage(@DestinationVariable Long roomId, @Payload ChatMessageRequest chatMessage) {
         ChatMessageCreateCommand chatMessageCreateCommand = ChatMessageCreateCommand.builder()
                 .content(chatMessage.text())
                 .from(chatMessage.from())
-                .roomId(chatMessage.roomId())
+                .roomId(roomId)
                 .build();
-        chatMessageCreateUseCase.createChatMessage(chatMessageCreateCommand);
-        return chatMessage;
+        Long chatId = chatMessageCreateUseCase.createChatMessage(chatMessageCreateCommand); // DB에 등록 후 Chat Message Id 반환
+        ChatMessageResponse chatMessageResponse = ChatMessageResponse.builder()
+                .id(chatId)
+                .content(chatMessage.text())
+                .writer(chatMessage.from())
+                .build();
+        return chatMessageResponse;
     }
 }
