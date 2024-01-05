@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record ChatRoomResponse(Long roomId) {
+public record ChatRoomListReadResponse(List<ChatRoomItemResponse> messageList, boolean hasNext) {
 }

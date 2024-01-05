@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,9 @@ public class ChatRoomJpaEntity {
     @Column(name = "chat_room_id")
     private Long chatRoomId;
 
+//    @BatchSize(size = 10)
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ChatMessageJpaEntity> chatMessageList = new ArrayList<>();
+    private final List<ChatMessageJpaEntity> chatMessageList = new ArrayList<>();
 
     public void createMessage(ChatMessageJpaEntity chatMessageJpaEntity){
         chatMessageList.add(chatMessageJpaEntity);
