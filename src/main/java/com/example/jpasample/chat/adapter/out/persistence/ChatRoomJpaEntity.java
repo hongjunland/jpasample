@@ -22,7 +22,7 @@ public class ChatRoomJpaEntity {
     @Column(name = "chat_room_id")
     private Long chatRoomId;
 
-//    @BatchSize(size = 10)
+    //    @BatchSize(size = 10)
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<ChatMessageJpaEntity> chatMessageList = new ArrayList<>();
 

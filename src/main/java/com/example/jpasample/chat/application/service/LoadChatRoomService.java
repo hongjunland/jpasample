@@ -13,6 +13,7 @@ import com.example.jpasample.common.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ class LoadChatRoomService implements ChatRoomLoadUseCase {
 
     @Override
     public ChatRoomListReadResponse getChatRoomList(ChatRoomListQuery query) {
-        PageRequest pageRequest = PageRequest.of(query.page(), query.size());
+        PageRequest pageRequest = PageRequest.of(query.page(), query.size(), Sort.by("chatRoomId").descending());
         List<ChatRoom> chatRoomList = loadChatRoomPort.search(pageRequest);
         ChatRoomListReadResponse response = ChatRoomListReadResponse.builder()
                 .messageList(chatRoomList.stream().map(chatRoom -> ChatRoomItemResponse.builder()
